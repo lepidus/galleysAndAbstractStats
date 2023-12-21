@@ -1,3 +1,3 @@
 <?php
 
-return new \APP\plugins\blocks\galleysAndAbstractStats\GalleysAndAbstractStatsPlugin();
+return new \APP\plugins\generic\galleysAndAbstractStats\GalleysAndAbstractStatsPlugin();
