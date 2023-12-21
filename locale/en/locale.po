@@ -1,0 +1,11 @@
+msgid "plugins.generic.galleysAndAbstractStats.name"
+msgstr "Galleys And Abstract Stats Plugin"
+
+msgid "plugins.generic.galleysAndAbstractStats.description"
+msgstr "Display Galleys and Abstract views stats on article page"
+
+msgid "plugins.generic.galleysAndAbstractStats.index.label"
+msgstr "Views"
+
+msgid "plugins.generic.galleysAndAbstractStats.index.viewsAndDownloadsInformation"
+msgstr "Views and downloads are with effect from 11 January 2018"
