@@ -1,0 +1,11 @@
+msgid "plugins.generic.galleysAndAbstractStats.name"
+msgstr "Estadísticas de Galeradas y Resúmenes"
+
+msgid "plugins.generic.galleysAndAbstractStats.description"
+msgstr "Muestra las estadísticas de visualización por galeradas y resumen en la página del artículo."
+
+msgid "plugins.generic.galleysAndAbstractStats.index.label"
+msgstr "Visualizaciones"
+
+msgid "plugins.generic.galleysAndAbstractStats.index.viewsAndDownloadsInformation"
+msgstr "Las visualizaciones y descargas son efectivas a partir del 11 de enero de 2018."
