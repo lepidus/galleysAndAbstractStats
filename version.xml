@@ -4,7 +4,7 @@
 <!--
   * version.xml
   *
-  * Copyright (c) 2023 Lepidus Tecnologia
+  * Copyright (c) 2023-2024 Lepidus Tecnologia
   * Distributed under the GNU GPL v3. For full terms see the file LICENSE.
   *
   * Plugin version information.
@@ -12,8 +12,8 @@
 <version>
 	<application>galleysAndAbstractStats</application>
 	<type>plugins.generic</type>
-	<release>0.0.1</release>
-	<date>2023-12-21</date>
+	<release>0.0.2</release>
+	<date>2024-01-09</date>
 	<lazy-load>1</lazy-load>
 	<class>GalleysAndAbstractStatsPlugin</class>
 </version>
