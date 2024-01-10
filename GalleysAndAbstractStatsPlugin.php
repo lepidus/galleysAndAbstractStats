@@ -7,8 +7,11 @@ use PKP\plugins\Hook;
 use APP\core\Application;
 use APP\core\Request;
 use APP\core\Services;
+use PKP\core\JSONMessage;
 use APP\facades\Repo;
 use APP\template\TemplateManager;
+use PKP\linkAction\LinkAction;
+use PKP\linkAction\request\AjaxModal;
 
 class GalleysAndAbstractStatsPlugin extends GenericPlugin
 {
@@ -32,9 +35,6 @@ class GalleysAndAbstractStatsPlugin extends GenericPlugin
         return __('plugins.generic.galleysAndAbstractStats.name');
     }
 
-    /**
-     * Get a description of the plugin.
-     */
     public function getDescription()
     {
         return __('plugins.generic.galleysAndAbstractStats.description');
@@ -58,14 +58,70 @@ class GalleysAndAbstractStatsPlugin extends GenericPlugin
         foreach ($galleys as $galley) {
             $galleysViews[] = [$galley->getGalleyLabel(), $galley->getViews()];
         }
-
         $templateMgr->assign([
             'abstractViews' => $metricsByType['abstract'],
             'galleysViews' => $galleysViews,
+            'statsFooterText' => $this->getSetting($contextId, 'statsFooterText')
         ]);
 
         $output .= $templateMgr->fetch($this->getTemplateResource('index.tpl'));
 
         return false;
+    }
+
+    public function getActions($request, $actionArgs)
+    {
+        $actions = parent::getActions($request, $actionArgs);
+
+        if (!$this->getEnabled()) {
+            return $actions;
+        }
+
+        $router = $request->getRouter();
+        $linkAction = new LinkAction(
+            'settings',
+            new AjaxModal(
+                $router->url(
+                    $request,
+                    null,
+                    null,
+                    'manage',
+                    null,
+                    [
+                        'verb' => 'settings',
+                        'plugin' => $this->getName(),
+                        'category' => 'generic'
+                    ]
+                ),
+                $this->getDisplayName()
+            ),
+            __('manager.plugins.settings'),
+            null
+        );
+
+        array_unshift($actions, $linkAction);
+
+        return $actions;
+    }
+
+    public function manage($args, $request)
+    {
+        switch ($request->getUserVar('verb')) {
+            case 'settings':
+
+                $form = new GalleysAndAbstractStatsForm($this);
+
+                if (!$request->getUserVar('save')) {
+                    $form->initData();
+                    return new JSONMessage(true, $form->fetch($request));
+                }
+
+                $form->readInputData();
+                if ($form->validate()) {
+                    $form->execute();
+                    return new JSONMessage(true);
+                }
+        }
+        return parent::manage($args, $request);
     }
 }

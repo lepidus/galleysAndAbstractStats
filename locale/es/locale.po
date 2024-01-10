@@ -7,5 +7,5 @@ msgstr "Muestra las estadísticas de visualización por galeradas y resumen en l
 msgid "plugins.generic.galleysAndAbstractStats.index.label"
 msgstr "Visualizaciones"
 
-msgid "plugins.generic.galleysAndAbstractStats.index.viewsAndDownloadsInformation"
-msgstr "Las visualizaciones y descargas son efectivas a partir del 11 de enero de 2018."
+msgid "plugins.generic.galleysAndAbstractStats.footerText"
+msgstr "Inserte el texto que se mostrará en el pie de página de la página de estadísticas."

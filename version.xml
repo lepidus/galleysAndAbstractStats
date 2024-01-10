@@ -12,8 +12,8 @@
 <version>
 	<application>galleysAndAbstractStats</application>
 	<type>plugins.generic</type>
-	<release>0.0.2</release>
-	<date>2024-01-09</date>
+	<release>0.0.3</release>
+	<date>2024-01-10</date>
 	<lazy-load>1</lazy-load>
 	<class>GalleysAndAbstractStatsPlugin</class>
 </version>

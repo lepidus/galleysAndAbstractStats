@@ -7,5 +7,5 @@ msgstr "Display Galleys and Abstract views stats on article page"
 msgid "plugins.generic.galleysAndAbstractStats.index.label"
 msgstr "Views"
 
-msgid "plugins.generic.galleysAndAbstractStats.index.viewsAndDownloadsInformation"
-msgstr "Views and downloads are with effect from 11 January 2018"
+msgid "plugins.generic.galleysAndAbstractStats.footerText"
+msgstr "Insert the text to be displayed in the footer of the statistics page."
