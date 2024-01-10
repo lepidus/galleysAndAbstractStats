@@ -8,4 +8,4 @@ msgid "plugins.generic.galleysAndAbstractStats.index.label"
 msgstr "Visualizações"
 
 msgid "plugins.generic.galleysAndAbstractStats.footerText"
-msgstr "Insira o texto a ser exibido no rodapé da página de estatística."
+msgstr "Insira o texto a ser exibido no rodapé da página de estatísticas."

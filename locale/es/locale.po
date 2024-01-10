@@ -8,4 +8,4 @@ msgid "plugins.generic.galleysAndAbstractStats.index.label"
 msgstr "Visualizaciones"
 
 msgid "plugins.generic.galleysAndAbstractStats.footerText"
-msgstr "Inserte el texto que se mostrará en el pie de página de la página de estadísticas."
+msgstr "Inserte el texto que se mostrará en el pie de la página de estadísticas."
