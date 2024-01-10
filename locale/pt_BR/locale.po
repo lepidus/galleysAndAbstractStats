@@ -7,5 +7,5 @@ msgstr "Exibe as estatísticas de visualização por composição final e resumo
 msgid "plugins.generic.galleysAndAbstractStats.index.label"
 msgstr "Visualizações"
 
-msgid "plugins.generic.galleysAndAbstractStats.index.viewsAndDownloadsInformation"
-msgstr "As visualizações e downloads têm efeito a partir de 11 de janeiro de 2018."
+msgid "plugins.generic.galleysAndAbstractStats.footerText"
+msgstr "Insira o texto a ser exibido no rodapé da página de estatística."

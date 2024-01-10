@@ -9,6 +9,6 @@
         {/foreach}
       {/if}
     </ul>
-    <sub>{translate key="plugins.generic.galleysAndAbstractStats.index.viewsAndDownloadsInformation"}</sub>
+    <sub>{$statsFooterText}</sub>
   </div>
 </div>
