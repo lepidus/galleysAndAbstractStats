@@ -10,8 +10,8 @@ use PKP\form\Form;
 use PKP\form\validation\FormValidatorCSRF;
 use PKP\form\validation\FormValidatorPost;
 
-class GalleysAndAbstractStatsForm extends Form {
-    
+class GalleysAndAbstractStatsForm extends Form
+{
     public function __construct(public GalleysAndAbstractStatsPlugin $plugin)
     {
         parent::__construct($plugin->getTemplateResource('settings.tpl'));
