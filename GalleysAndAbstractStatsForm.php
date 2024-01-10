@@ -12,8 +12,11 @@ use PKP\form\validation\FormValidatorPost;
 
 class GalleysAndAbstractStatsForm extends Form
 {
-    public function __construct(public GalleysAndAbstractStatsPlugin $plugin)
+    private $plugin;
+
+    public function __construct(GalleysAndAbstractStatsPlugin $plugin)
     {
+        $this->plugin = $plugin;
         parent::__construct($plugin->getTemplateResource('settings.tpl'));
 
         $this->addCheck(new FormValidatorPost($this));
