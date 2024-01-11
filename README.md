@@ -2,6 +2,12 @@
 
 This plugin provides statistics for galleys and abstract access under the article view page.
 
+## Compatibility
+
+The latest release of this plugin is compatible with the following PKP applications:
+
+* OJS 3.4.0
+
 ## Installation
 
 1. Install the plugin using the latest Package available for the application you are using.
