@@ -56,7 +56,7 @@ class GalleysAndAbstractStatsPlugin extends GenericPlugin
 
         $galleysViews = [];
         foreach ($galleys as $galley) {
-            $galleysViews[] = [$galley->getGalleyLabel(), $galley->getViews()];
+            $galleysViews[] = ['galleyLabel' => $galley->getGalleyLabel(), 'galleyViews' => $galley->getViews()];
         }
         $templateMgr->assign([
             'abstractViews' => $metricsByType['abstract'],

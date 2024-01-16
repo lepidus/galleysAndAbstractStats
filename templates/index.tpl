@@ -5,7 +5,7 @@
       <li style="padding: 5px 0;">{translate key="article.abstract"} <span id="viewsCount">{$abstractViews}</span></li>
       {if count($galleysViews) > 0}
         {foreach from=$galleysViews item=galley}
-          <li style="padding: 5px 0;">{$galley[0]} <span class="task_count" id="viewsCount">{$galley[1]}<span></li>
+          <li style="padding: 5px 0;">{$galley['galleyLabel']|escape} <span class="task_count" id="viewsCount">{$galley['galleyViews']|escape}<span></li>
         {/foreach}
       {/if}
     </ul>
