@@ -18,6 +18,10 @@ The latest release of this plugin is compatible with the following PKP applicati
 
 After activating the plugin, statistics are displayed on the article page, showing the count of views for galleys and abstracts. You can add/edit the footer text to display below stats in *Website > Plugins > Generic > Galleys And Abstract Stats > Settings*.
 
+## Credits
+
+This plugin was conceived and sponsored by the [Academy of Science of South Africa (ASSAf)](https://www.assaf.org.za/).
+
 ## License
 
 This project is licensed under the GNU General Public License v3. See the [LICENSE](LICENSE) file for details.
