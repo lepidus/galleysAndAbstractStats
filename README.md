@@ -22,9 +22,10 @@ After activating the plugin, statistics are displayed on the article page, showi
 
 This plugin was conceived and sponsored by the [Academy of Science of South Africa (ASSAf)](https://www.assaf.org.za/).
 
+Developed by [Lepidus Tecnologia](https://github.com/lepidus).
+
 ## License
 
 This project is licensed under the GNU General Public License v3. See the [LICENSE](LICENSE) file for details.
-***
 
-Developed by [Lepidus Tecnologia](https://github.com/lepidus)
+Copyright (c) 2024 Lepidus Tecnologia.
