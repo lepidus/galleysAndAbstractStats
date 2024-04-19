@@ -1,14 +1,6 @@
 <?php
 
-namespace APP\plugins\generic\galleysAndAbstractStats;
-
-use APP\core\Application;
-use APP\notification\Notification;
-use APP\notification\NotificationManager;
-use APP\template\TemplateManager;
-use PKP\form\Form;
-use PKP\form\validation\FormValidatorCSRF;
-use PKP\form\validation\FormValidatorPost;
+import('lib.pkp.classes.form.Form');
 
 class GalleysAndAbstractStatsForm extends Form
 {
@@ -70,7 +62,7 @@ class GalleysAndAbstractStatsForm extends Form
         $notificationMgr = new NotificationManager();
         $notificationMgr->createTrivialNotification(
             Application::get()->getRequest()->getUser()->getId(),
-            Notification::NOTIFICATION_TYPE_SUCCESS,
+            NOTIFICATION_TYPE_SUCCESS,
             ['contents' => __('common.changesSaved')]
         );
 
