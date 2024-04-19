@@ -6,7 +6,7 @@ This plugin provides statistics for galleys and abstract access under the articl
 
 The latest release of this plugin is compatible with the following PKP applications:
 
-* OJS 3.4.0
+* OJS 3.3.0
 
 ## Installation
 

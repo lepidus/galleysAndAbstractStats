@@ -1,17 +1,6 @@
 <?php
 
-namespace APP\plugins\generic\galleysAndAbstractStats;
-
-use PKP\plugins\GenericPlugin;
-use PKP\plugins\Hook;
-use APP\core\Application;
-use APP\core\Request;
-use APP\core\Services;
-use PKP\core\JSONMessage;
-use APP\facades\Repo;
-use APP\template\TemplateManager;
-use PKP\linkAction\LinkAction;
-use PKP\linkAction\request\AjaxModal;
+import('lib.pkp.classes.plugins.GenericPlugin');
 
 class GalleysAndAbstractStatsPlugin extends GenericPlugin
 {
@@ -19,8 +8,8 @@ class GalleysAndAbstractStatsPlugin extends GenericPlugin
     {
         $success = parent::register($category, $path, $mainContextId);
         if ($success && $this->getEnabled($mainContextId)) {
-            Hook::add('Templates::Article::Details', [$this, 'viewDataStatement']);
-            Hook::add('TemplateManager::display', function ($hookName, $args) {
+            HookRegistry::register('Templates::Article::Details', [$this, 'viewDataStatement']);
+            HookRegistry::register('TemplateManager::display', function ($hookName, $args) {
                 $request = Application::get()->getRequest();
                 $templateMgr = TemplateManager::getManager($request);
                 $pluginFullPath = $request->getBaseUrl() . '/' . $this->getPluginPath();
@@ -48,18 +37,17 @@ class GalleysAndAbstractStatsPlugin extends GenericPlugin
         $publication = $templateMgr->getTemplateVars('publication');
         $submissionId = $publication->getData('submissionId');
         $contextId = $request->getContext()->getId();
-        $statsService = Services::get('publicationStats');
-        $metricsByType = $statsService->getTotalsByType($submissionId, $contextId, null, null);
-        $galleys = Repo::galley()->getCollector()
-                ->filterByPublicationIds(['publicationIds' => $publication->getId()])
-                ->getMany();
+
+        $abstractViews = $this->getAbstractViews($publication, $contextId);
+
+        $galleys = $publication->getData('galleys');
 
         $galleysViews = [];
         foreach ($galleys as $galley) {
             $galleysViews[] = ['galleyLabel' => $galley->getGalleyLabel(), 'galleyViews' => $galley->getViews()];
         }
         $templateMgr->assign([
-            'abstractViews' => $metricsByType['abstract'],
+            'abstractViews' => $abstractViews,
             'galleysViews' => $galleysViews,
             'statsFooterText' => $this->getSetting($contextId, 'statsFooterText')
         ]);
@@ -67,6 +55,19 @@ class GalleysAndAbstractStatsPlugin extends GenericPlugin
         $output .= $templateMgr->fetch($this->getTemplateResource('index.tpl'));
 
         return false;
+    }
+
+    private function getAbstractViews($publication, $contextId)
+    {
+        $statsService = \Services::get('stats');
+        $allowedParams['publicationIds'] = [$publication->getId()];
+        $allowedParams['contextIds'] = $contextId;
+
+        $abstractRecords = $statsService->getRecords(array_merge($allowedParams, [
+            'assocTypes' => [ASSOC_TYPE_SUBMISSION],
+        ]));
+
+        return array_reduce($abstractRecords, [$statsService, 'sumMetric'], 0);
     }
 
     public function getActions($request, $actionArgs)
@@ -106,9 +107,10 @@ class GalleysAndAbstractStatsPlugin extends GenericPlugin
 
     public function manage($args, $request)
     {
+        import('plugins.generic.galleysAndAbstractStats.GalleysAndAbstractStatsForm');
+
         switch ($request->getUserVar('verb')) {
             case 'settings':
-
                 $form = new GalleysAndAbstractStatsForm($this);
 
                 if (!$request->getUserVar('save')) {

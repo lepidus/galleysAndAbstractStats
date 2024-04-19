@@ -1,3 +1,4 @@
 <?php
 
-return new \APP\plugins\generic\galleysAndAbstractStats\GalleysAndAbstractStatsPlugin();
+require_once('GalleysAndAbstractStatsPlugin.inc.php');
+return new GalleysAndAbstractStatsPlugin();
