@@ -37,17 +37,16 @@ class GalleysAndAbstractStatsPlugin extends GenericPlugin
         $publication = $templateMgr->getTemplateVars('publication');
         $submissionId = $publication->getData('submissionId');
         $contextId = $request->getContext()->getId();
-
-        $abstractViews = $this->getAbstractViews($publication, $contextId);
-
         $galleys = $publication->getData('galleys');
+        $submission = Services::get('submission')->get($submissionId);
 
         $galleysViews = [];
         foreach ($galleys as $galley) {
             $galleysViews[] = ['galleyLabel' => $galley->getGalleyLabel(), 'galleyViews' => $galley->getViews()];
         }
+
         $templateMgr->assign([
-            'abstractViews' => $abstractViews,
+            'abstractViews' => $submission->getViews(),
             'galleysViews' => $galleysViews,
             'statsFooterText' => $this->getSetting($contextId, 'statsFooterText')
         ]);
@@ -55,19 +54,6 @@ class GalleysAndAbstractStatsPlugin extends GenericPlugin
         $output .= $templateMgr->fetch($this->getTemplateResource('index.tpl'));
 
         return false;
-    }
-
-    private function getAbstractViews($publication, $contextId)
-    {
-        $statsService = \Services::get('stats');
-        $allowedParams['publicationIds'] = [$publication->getId()];
-        $allowedParams['contextIds'] = $contextId;
-
-        $abstractRecords = $statsService->getRecords(array_merge($allowedParams, [
-            'assocTypes' => [ASSOC_TYPE_SUBMISSION],
-        ]));
-
-        return array_reduce($abstractRecords, [$statsService, 'sumMetric'], 0);
     }
 
     public function getActions($request, $actionArgs)
