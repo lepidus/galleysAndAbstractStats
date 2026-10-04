@@ -3,6 +3,15 @@ variables:
 
 include:
   - project: 'documentacao-e-tarefas/modelosparaintegracaocontinua'
-    ref: main
+    ref: stable-3_3_0
     file:
       - 'templates/groups/pkp_plugin.yml'
+
+article-statistics:
+  stage: validation
+  image: php:${PHP_VERSION}-cli
+  parallel:
+    matrix:
+      - PHP_VERSION: ['7.4', '8.2']
+  script:
+    - php tests/article-statistics.php

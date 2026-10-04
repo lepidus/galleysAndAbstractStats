@@ -1,6 +1,8 @@
 <?php
 
 import('lib.pkp.classes.plugins.GenericPlugin');
+import('lib.pkp.classes.cache.CacheManager');
+require_once __DIR__ . '/ArticleStatistics.inc.php';
 
 class GalleysAndAbstractStatsPlugin extends GenericPlugin
 {
@@ -35,18 +37,26 @@ class GalleysAndAbstractStatsPlugin extends GenericPlugin
         $output = &$params[2];
         $request = Application::get()->getRequest();
         $publication = $templateMgr->getTemplateVars('publication');
-        $submissionId = $publication->getData('submissionId');
         $contextId = $request->getContext()->getId();
         $galleys = $publication->getData('galleys');
-        $submission = Services::get('submission')->get($submissionId);
+        $statistics = new ArticleStatistics(
+            Application::get(),
+            CacheManager::getManager(),
+            rtrim(Config::getVar('files', 'files_dir'), DIRECTORY_SEPARATOR) . '/usageStats'
+        );
+        $fileIds = [];
+        foreach ($galleys as $galley) {
+            $fileIds[] = $galley->getFileId();
+        }
+        $totals = $statistics->get($request->getContext(), $publication, $fileIds);
 
         $galleysViews = [];
         foreach ($galleys as $galley) {
-            $galleysViews[] = ['galleyLabel' => $galley->getGalleyLabel(), 'galleyViews' => $galley->getViews()];
+            $galleysViews[] = ['galleyLabel' => $galley->getGalleyLabel(), 'galleyViews' => $totals['fileViews'][$galley->getFileId()] ?? 0];
         }
 
         $templateMgr->assign([
-            'abstractViews' => $submission->getViews(),
+            'abstractViews' => $totals['abstractViews'],
             'galleysViews' => $galleysViews,
             'statsFooterText' => $this->getSetting($contextId, 'statsFooterText')
         ]);
