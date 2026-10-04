@@ -54,10 +54,7 @@ class GalleysAndAbstractStatsPlugin extends GenericPlugin
                 ->filterByPublicationIds(['publicationIds' => $publication->getId()])
                 ->getMany();
 
-        $galleysViews = [];
-        foreach ($galleys as $galley) {
-            $galleysViews[] = ['galleyLabel' => $galley->getGalleyLabel(), 'galleyViews' => $galley->getViews()];
-        }
+        $galleysViews = (new ArticleStatistics())->getGalleyViews($statsService, $galleys, $contextId);
         $templateMgr->assign([
             'abstractViews' => $metricsByType['abstract'],
             'galleysViews' => $galleysViews,

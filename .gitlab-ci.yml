@@ -3,6 +3,14 @@ variables:
 
 include:
   - project: 'documentacao-e-tarefas/modelosparaintegracaocontinua'
-    ref: main
+    ref: stable-3_4_0
     file:
       - 'templates/groups/pkp_plugin.yml'
+article-statistics:
+  stage: validation
+  image: php:${PHP_VERSION}-cli
+  parallel:
+    matrix:
+      - PHP_VERSION: ['8.0', '8.2']
+  script:
+    - php tests/galley-statistics.php
