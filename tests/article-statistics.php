@@ -148,7 +148,13 @@ try {
     $app->abstract = 41;
     check($stats->get($context, $publication, [])['abstractViews'] === 41, 'Missing archive used cache');
     check($cache->entries === $before, 'Missing archive wrote cache');
-    echo "OK: totals, batched queries, daily cache, import invalidation, metric/publication isolation, expiration and conservative fallback\n";
+    $articleTemplate = file_get_contents(dirname(__DIR__) . '/templates/index.tpl');
+    check(
+        substr_count($articleTemplate, '{$statsFooterText') === 1
+            && strpos($articleTemplate, '{$statsFooterText|strip_unsafe_html}') !== false,
+        'Footer text must be filtered with strip_unsafe_html'
+    );
+    echo "OK: totals, batched queries, daily cache, import invalidation, metric/publication isolation, expiration and conservative fallback, filtered footer\n";
 } finally {
     @unlink($path . '/processing/log');
     @rmdir($path . '/processing');
