@@ -9,6 +9,6 @@
         {/foreach}
       {/if}
     </ul>
-    <sub>{$statsFooterText}</sub>
+    <sub>{$statsFooterText|strip_unsafe_html}</sub>
   </div>
 </div>

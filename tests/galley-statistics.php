@@ -199,4 +199,12 @@ namespace {
     }
     echo "PASS article details callback, assigned values and appended template output\n";
     echo "PASS galley totals, labels, order, shared/missing files, context/date filters, one batch\n";
+    $articleTemplate = file_get_contents(dirname(__DIR__) . '/templates/index.tpl');
+    if (
+        substr_count($articleTemplate, '{$statsFooterText') !== 1
+        || strpos($articleTemplate, '{$statsFooterText|strip_unsafe_html}') === false
+    ) {
+        throw new \Exception('Footer text must be filtered with strip_unsafe_html');
+    }
+    echo "PASS footer text filtered with strip_unsafe_html\n";
 }
